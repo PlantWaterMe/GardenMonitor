@@ -24,7 +24,9 @@ func main() {
 		log.Println(err)
 	}
 
-	err = allwinner.PA1.In(gpio.PullNoChange, gpio.BothEdges)
+	inp := allwinner.PA1
+
+	err = inp.In(gpio.PullDown, gpio.RisingEdge)
 	if err != nil {
 		log.Println(err)
 	}
@@ -32,10 +34,10 @@ func main() {
 	for {
 
 		log.Printf("PA16 is %s", allwinner.PA16.Read())
-		log.Printf("PA1 is %s", allwinner.PA1.Read())
+		log.Printf("PA1 is %s", inp.Read())
 
 		time.Sleep(5 * time.Second)
-		lvl := allwinner.PA1.Read()
+		lvl := inp.Read()
 		if lvl {
 			log.Println("PA1 is high")
 		} else {
