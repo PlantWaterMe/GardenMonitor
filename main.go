@@ -47,11 +47,14 @@ func main() {
 	}
 
 	log.Printf("PA16 is %s", allwinner.PA16.Read())
-	log.Printf("GPIO is %s", p.Read())
+	log.Printf("GPIO17 is %s", p.Read())
 
 	for {
 		if inp.Read() {
 			log.Println("PA1 is high")
+		}
+		if p.Read() {
+			log.Println("GPIO17 is high")
 		}
 	}
 }
