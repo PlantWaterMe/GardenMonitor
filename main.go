@@ -2,7 +2,6 @@ package main
 
 import (
 	"log"
-	"time"
 
 	"periph.io/x/conn/v3/gpio"
 	"periph.io/x/host/v3"
@@ -32,16 +31,10 @@ func main() {
 	}
 
 	for {
-
 		log.Printf("PA16 is %s", allwinner.PA16.Read())
 		log.Printf("PA1 is %s", inp.Read())
 
-		time.Sleep(5 * time.Second)
-		lvl := inp.Read()
-		if lvl {
-			log.Println("PA1 is high")
-		} else {
-			log.Println("PA1 is low")
-		}
+		inp.WaitForEdge(-1)
+		log.Println("PA1 is high")
 	}
 }
