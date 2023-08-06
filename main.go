@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"periph.io/x/conn/v3/driver/driverreg"
+	"periph.io/x/conn/v3/gpio"
 	"periph.io/x/conn/v3/gpio/gpioreg"
 	"periph.io/x/host/v3"
 	"periph.io/x/host/v3/allwinner"
@@ -53,25 +54,18 @@ func main() {
 		log.Fatal("Failed to find GPIO17")
 	}
 
-	// A pin can be read, independent of its state; it doesn't matter if it is
-	// set as input or output.
-	log.Printf("%s is %s\n", p, p.Read())
+	err = inp.In(gpio.PullDown, gpio.BothEdges)
+	if err != nil {
+		log.Println(err)
+	}
 
-	/*
-		err = inp.In(gpio.PullDown, gpio.RisingEdge)
-		if err != nil {
-			log.Println(err)
-		}
+	log.Printf("PA16 is %s", allwinner.PA16.Read())
+	log.Printf("GPIO17 is %s", p.Read())
 
-		log.Printf("PA16 is %s", allwinner.PA16.Read())
-		log.Printf("GPIO17 is %s", p.Read())
-	*/
 	for {
-		if inp.Read() {
-			log.Println("PA1 is high")
-		}
-		if p.Read() {
-			log.Println("GPIO17 is high")
+		if inp.WaitForEdge(-1) {
+			lvl := inp.Read()
+			log.Println(lvl)
 		}
 	}
 }
