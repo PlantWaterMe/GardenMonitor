@@ -34,6 +34,10 @@ func main() {
 	log.Printf("PA1 is %s", inp.Read())
 
 	for {
-		inp.Read()
+		if inp.Read() {
+			log.Println("PA1 is high")
+		} else {
+			log.Println("PA1 is low")
+		}
 	}
 }
