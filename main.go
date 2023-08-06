@@ -54,7 +54,7 @@ func main() {
 		log.Fatal("Failed to find GPIO17")
 	}
 
-	err = inp.In(gpio.PullUp, gpio.BothEdges)
+	err = inp.In(gpio.Float, gpio.BothEdges)
 	if err != nil {
 		log.Println(err)
 	}
@@ -65,7 +65,9 @@ func main() {
 	for {
 		if inp.WaitForEdge(-1) {
 			lvl := inp.Read()
-			log.Println(lvl)
+			log.Println("allwinner: ", lvl)
+			lvlp := p.Read()
+			log.Println("gpio: ", lvlp)
 		}
 	}
 }
