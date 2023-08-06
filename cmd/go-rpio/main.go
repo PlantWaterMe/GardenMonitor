@@ -19,6 +19,9 @@ func main() {
 	pin := rpio.Pin(1)
 	pin.Output()
 
+	pin.High()
+	time.Sleep(5 * time.Second)
+
 	for x := 0; x < 20; x++ {
 		pin.Toggle()
 		time.Sleep(time.Second / 5)
