@@ -66,8 +66,6 @@ func main() {
 		if inp.WaitForEdge(-1) {
 			lvl := inp.Read()
 			log.Println("allwinner: ", lvl)
-			lvlp := p.Read()
-			log.Println("gpio: ", lvlp)
 		}
 	}
 }
