@@ -9,5 +9,5 @@ import (
 func main() {
 	host.Init()
 
-	allwinner.PD14.Out(gpio.High)
+	allwinner.PA14.Out(gpio.High)
 }
