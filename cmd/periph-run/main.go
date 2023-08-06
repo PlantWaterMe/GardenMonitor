@@ -5,7 +5,6 @@ import (
 
 	"periph.io/x/host/v3"
 	"periph.io/x/host/v3/allwinner"
-	"periph.io/x/host/v3/bcm283x"
 )
 
 func main() {
@@ -18,26 +17,8 @@ func main() {
 		log.Println("H3")
 	}
 
-	if bcm283x.GPIO18.Read() {
-		log.Println("GPIO18 is high")
-	} else {
-		log.Println("GPIO18 is low")
-	}
-
-	err = bcm283x.GPIO18.Out(true)
+	err = allwinner.PA16.Out(true)
 	if err != nil {
 		log.Println(err)
 	}
-
-	if bcm283x.GPIO1.Read() {
-		log.Println("GPIO1 is high")
-	} else {
-		log.Println("GPIO1 is low")
-	}
-
-	err = bcm283x.GPIO1.Out(true)
-	if err != nil {
-		log.Println(err)
-	}
-
 }
