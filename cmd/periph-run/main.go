@@ -1,13 +1,20 @@
 package main
 
 import (
-	"periph.io/x/conn/v3/gpio"
+	"log"
+
 	"periph.io/x/host/v3"
-	"periph.io/x/host/v3/bcm283x"
+	"periph.io/x/host/v3/allwinner"
 )
 
 func main() {
-	host.Init()
+	_, err := host.Init()
+	if err != nil {
+		panic(err)
+	}
 
-	bcm283x.GPIO18.Out(gpio.High)
+	if allwinner.IsH3() {
+		log.Println("H3")
+	}
+
 }
