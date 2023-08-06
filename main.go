@@ -54,7 +54,7 @@ func main() {
 		log.Fatal("Failed to find GPIO17")
 	}
 
-	err = inp.In(gpio.PullDown, gpio.BothEdges)
+	err = inp.In(gpio.PullUp, gpio.BothEdges)
 	if err != nil {
 		log.Println(err)
 	}
