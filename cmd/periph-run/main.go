@@ -24,7 +24,10 @@ func main() {
 		log.Println("GPIO18 is low")
 	}
 
-	bcm283x.GPIO18.Out(true)
+	err = bcm283x.GPIO18.Out(true)
+	if err != nil {
+		log.Println(err)
+	}
 
 	if bcm283x.GPIO1.Read() {
 		log.Println("GPIO1 is high")
@@ -32,6 +35,9 @@ func main() {
 		log.Println("GPIO1 is low")
 	}
 
-	bcm283x.GPIO1.Out(true)
+	err = bcm283x.GPIO1.Out(true)
+	if err != nil {
+		log.Println(err)
+	}
 
 }
