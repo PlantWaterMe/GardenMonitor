@@ -36,5 +36,6 @@ func main() {
 	for {
 		inp.WaitForEdge(-1)
 		log.Printf("PA1 is %s", inp.Read())
+		log.Printf("PA1 is %s", inp.FastRead().String())
 	}
 }
