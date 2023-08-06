@@ -34,7 +34,6 @@ func main() {
 	log.Printf("PA1 is %s", inp.Read())
 
 	for {
-		inp.WaitForEdge(-1)
-		log.Printf("PA1 is %s", inp.Read())
+		inp.Read()
 	}
 }
