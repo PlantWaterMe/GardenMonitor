@@ -1,21 +1,38 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"log"
 
-	"periph.io/x/conn/v3/driver/driverreg"
-	"periph.io/x/conn/v3/gpio"
-	"periph.io/x/conn/v3/gpio/gpioreg"
+	"github.com/PlantWaterMe/GardenMonitor/sensor"
 	"periph.io/x/host/v3"
 	"periph.io/x/host/v3/allwinner"
 )
 
 func main() {
+
+	err := Init()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	ds := sensor.New(allwinner.PA16, allwinner.PA1)
+
+	for {
+		if ds.Probe() == sensor.NotEmpty {
+			fmt.Println("Not Empty")
+		} else {
+			fmt.Println("Empty")
+		}
+	}
+}
+
+func Init() error {
 	// Make sure periph is initialized.
 	state, err := host.Init()
 	if err != nil {
-		log.Fatalf("failed to initialize periph: %v", err)
+		return errors.New(fmt.Sprintf("failed to initialize periph: %v", err))
 	}
 
 	// Prints the loaded driver.
@@ -37,35 +54,5 @@ func main() {
 		fmt.Printf("- %s: %v\n", failure.D, failure.Err)
 	}
 
-	err = allwinner.PA16.Out(true)
-	if err != nil {
-		log.Println(err)
-	}
-
-	inp := allwinner.PA1
-
-	if _, err := driverreg.Init(); err != nil {
-		log.Fatal(err)
-	}
-
-	// Use gpioreg GPIO pin registry to find a GPIO pin by name.
-	p := gpioreg.ByName("GPIO17")
-	if p == nil {
-		log.Fatal("Failed to find GPIO17")
-	}
-
-	err = inp.In(gpio.Float, gpio.BothEdges)
-	if err != nil {
-		log.Println(err)
-	}
-
-	log.Printf("PA16 is %s", allwinner.PA16.Read())
-	log.Printf("GPIO17 is %s", p.Read())
-
-	for {
-		if inp.WaitForEdge(-1) {
-			lvl := inp.Read()
-			log.Println("allwinner: ", lvl)
-		}
-	}
+	return nil
 }
