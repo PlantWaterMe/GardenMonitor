@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"time"
 
 	"github.com/PlantWaterMe/GardenMonitor/sensor"
 	"periph.io/x/host/v3"
@@ -20,6 +21,7 @@ func main() {
 	ds := sensor.New(allwinner.PA16, allwinner.PA1)
 
 	for {
+		time.Sleep(1 * time.Second)
 		if ds.Probe() == sensor.NotEmpty {
 			fmt.Println("Not Empty")
 		} else {
