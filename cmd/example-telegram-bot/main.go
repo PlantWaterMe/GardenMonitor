@@ -1,7 +1,6 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 	"log"
 	"os"
@@ -65,7 +64,7 @@ func Init() error {
 	// Make sure periph is initialized.
 	state, err := host.Init()
 	if err != nil {
-		return errors.New(fmt.Sprintf("failed to initialize periph: %v", err))
+		return fmt.Errorf("failed to initialize periph: %v", err)
 	}
 
 	// Prints the loaded driver.
