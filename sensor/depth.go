@@ -15,6 +15,13 @@ const (
 	NotEmpty Level = true  // Depth sensor does not show empty
 )
 
+func (l Level) String() string {
+	if l == Empty {
+		return "empty"
+	}
+	return "not empty"
+}
+
 type Depth struct {
 	PowerPin   gpio.PinIO
 	MeasurePin gpio.PinIO
