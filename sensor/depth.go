@@ -1,6 +1,7 @@
 package sensor
 
 import (
+	"os"
 	"time"
 
 	"periph.io/x/conn/v3/gpio"
@@ -38,6 +39,11 @@ func (d *Depth) Probe() Level {
 }
 
 func (d *Depth) ProbeFor(duration time.Duration) Level {
+	debug := os.Getenv("DEBUG")
+	if debug == "true" {
+		return NotEmpty
+	}
+
 	if d.MeasurePin.WaitForEdge(duration) {
 		return NotEmpty
 	}
