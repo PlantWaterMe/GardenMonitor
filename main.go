@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/PlantWaterMe/GardenMonitor/handlers"
+	"github.com/PlantWaterMe/GardenMonitor/bot/handlers"
 	"github.com/PlantWaterMe/GardenMonitor/sensor"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"github.com/joho/godotenv"
