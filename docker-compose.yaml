@@ -1,0 +1,35 @@
+version: '3'
+services:
+  waterlevelapi:
+    build:
+      context: .
+      dockerfile: ./waterapi.Dockerfile
+    ports:
+      - "8080:8080" # http
+    env_file:
+      - .env-compose
+    depends_on:
+      - db
+      - queue
+    restart: on-failure
+
+  db:
+    image: postgres:15.4
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: waterlevel
+    volumes:
+      - db-data:/var/lib/mysql
+    restart: unless-stopped
+
+  queue:
+    image: redis
+    restart: always
+    ports:
+      - '6379:6379'
+
+volumes:
+ db-data:

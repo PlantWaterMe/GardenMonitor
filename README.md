@@ -14,6 +14,7 @@ Monitor Garden tank water level by sending data to a queue and storing it in a d
   - [API](#api)
     - [Setup](#setup-2)
     - [Execution](#execution-2)
+    - [Docker](#docker)
   - [Database](#database)
     - [Setup](#setup-3)
   - [Queue](#queue)
@@ -60,6 +61,12 @@ make run-queue-consumer
 ### Execution
 ```bash
 make run-api
+```
+
+### Docker
+Create image
+```bash
+docker build -f waterapi.Dockerfile . -t waterapi 
 ```
 
 ## Database
