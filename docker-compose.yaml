@@ -13,6 +13,17 @@ services:
       - queue
     restart: on-failure
 
+  queue-consumer:
+    build:
+      context: .
+      dockerfile: ./queue-consumer.Dockerfile
+    env_file:
+      - .env-compose
+    depends_on:
+      - db
+      - queue
+    restart: on-failure
+
   db:
     image: postgres:15.4
     ports:
