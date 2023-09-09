@@ -17,9 +17,9 @@ const (
 
 func (l Level) String() string {
 	if l == Empty {
-		return "empty"
+		return "low"
 	}
-	return "not empty"
+	return "high"
 }
 
 type Depth struct {

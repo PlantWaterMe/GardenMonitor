@@ -3,8 +3,8 @@ package api
 import (
 	"log"
 
-	"github.com/PlantWaterMe/GardenMonitor/api/repository"
 	"github.com/PlantWaterMe/GardenMonitor/model"
+	"github.com/PlantWaterMe/GardenMonitor/repository"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
